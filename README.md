@@ -1,8 +1,34 @@
 # CfnResponse
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/cfn_response`. To experiment with that code, run `bin/console` for an interactive prompt.
+[![BoltOps Badge](https://img.boltops.com/boltops/badges/boltops-badge.png)](https://www.boltops.com)
 
-TODO: Delete this and the text above, and describe your gem
+CfnResponse helps with writing [Custom CloudFormation resources](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-custom-resources.html). It builds the the response that is sent back to CloudFormation service from the Lambda function.
+
+## Usage
+
+```ruby
+require "cfn_response"
+require "json"
+
+def lambda_handler(event:, context:)
+  puts "event: #{JSON.pretty_generate(event)}"
+  resp = CfnResponse.new(event, context)
+
+  data = {a: 1, b: 2}
+  resp.success(Data: data)
+  # or
+  # resp.failed
+
+  sleep 10 # a little time for logs to be sent to CloudWatch
+# We rescue all exceptions and send an message to CloudFormation so we dont have to
+# wait for over an hour for the stack operation to timeout and rollback.
+rescue Exception => e
+  puts e.message
+  puts e.backtrace
+  sleep 10 # a little time for logs to be sent to CloudWatch
+  resp.failed
+end
+```
 
 ## Installation
 
@@ -14,26 +40,15 @@ gem 'cfn_response'
 
 And then execute:
 
-    $ bundle install
+    bundle install
 
 Or install it yourself as:
 
-    $ gem install cfn_response
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+    gem install cfn_response
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/cfn_response.
-
+Bug reports and pull requests are welcome on GitHub at https://github.com/tongueroo/cfn_response
 
 ## License
 
