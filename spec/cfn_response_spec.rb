@@ -5,8 +5,33 @@ RSpec.describe CfnResponse do
   context "create" do
     let(:event) { event_payload("create") }
 
+    before(:each) do
+      allow(CfnResponse::Sender).to receive(:new).and_return(null)
+    end
+
     it "success" do
-      subject.success
+      resp = subject.success
+      expect(resp.to_s).to eq(null.to_s) # due to stub
+
+      resp = subject.success(Data: {a: 1})
+      expect(resp["Data"].to_s).to eq(null.to_s)
+    end
+
+    it "failed" do
+      resp = subject.failed
+      expect(resp.to_s).to eq(null.to_s) # due to stub
+    end
+
+    it "call" do
+      resp = subject.call
+      expect(resp.to_s).to eq(null.to_s) # due to stub
+    end
+
+    it "safely" do
+      resp = subject.safely do
+        subject.success
+      end
+      expect(resp.to_s).to eq(null.to_s) # due to stub
     end
   end
 end

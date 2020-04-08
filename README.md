@@ -30,6 +30,36 @@ rescue Exception => e
 end
 ```
 
+The block form with `safely`:
+
+```ruby
+require "cfn_response"
+require "json"
+
+def lambda_handler(event:, context:)
+  puts "event: #{JSON.pretty_generate(event)}"
+  resp = CfnResponse.new(event, context)
+
+  # will always sleep 10 and call resp.fail on all Exceptions
+  resp.safely do
+    case event['RequestType']
+    when "Create"
+      # create logic
+      data = {a: 1, b: 2}
+      resp.success(Data: data)
+      # or
+      # resp.failed
+    when "Update"
+      # update logic
+      resp.success
+    when "Delete"
+      # delete logic
+      resp.success
+    end
+  end
+end
+```
+
 ## Installation
 
 Add this line to your application's Gemfile:
