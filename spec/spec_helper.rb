@@ -8,6 +8,10 @@ module Helper
   def event_payload(name)
     JSON.load(IO.read("spec/fixtures/#{name}.json"))
   end
+
+  def null
+    double(:null).as_null_object
+  end
 end
 
 RSpec.configure do |config|
