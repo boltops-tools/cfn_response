@@ -59,6 +59,17 @@ rescue Exception => e
 end
 ```
 
+### Custom Resource Provider Response Fields
+
+Ultimately, CloudFormation expects a JSON body to be sent to it with these possible fields: Status, Reason, PhysicalResourceId, StackId, RequestId, LogicalResourceId, NoEcho, Data. Docs: [Custom Resource Response Objects](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/crpg-ref-responses.html).
+
+The `success` and `failed` methods accept a Hash which is simply merged down to the final JSON body that is sent to CloudFormation. Most of the fields are prefilled conveniently by this library.  You may want to pass some values.  Example:
+
+```ruby
+resp = CfnResponse.new(event, context)
+resp.success(Data: {a: 1, b: 2}, NoEcho: true)
+```
+
 ## Installation
 
 Add this line to your application's Gemfile:
