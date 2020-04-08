@@ -33,8 +33,8 @@ class CfnResponse
     pause_for_cloudwatch
     result
   rescue Exception => e
-    puts e.message
-    puts e.backtrace
+    puts "ERROR #{e.message}"
+    puts "BACKTRACE:\n#{e.backtrace.join("\n")}"
     pause_for_cloudwatch
     failed
   end
