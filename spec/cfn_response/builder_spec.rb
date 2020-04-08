@@ -13,7 +13,7 @@ RSpec.describe CfnResponse::Builder do
          "LogicalResourceId"=>"Invoker",
          "Reason"=>"See the details in CloudWatch Log Group: #[Double :null] Log Stream: #[Double :null]",
          "Status"=>"SUCCESS",
-         "PhysicalResourceId"=>"PhysicalId"}
+         "PhysicalResourceId"=>"PhysicalResourceId"}
       )
     end
 
@@ -25,7 +25,7 @@ RSpec.describe CfnResponse::Builder do
          "LogicalResourceId"=>"Invoker",
          "Reason"=>"See the details in CloudWatch Log Group: #[Double :null] Log Stream: #[Double :null]",
          "Status"=>"FAILED",
-         "PhysicalResourceId"=>"PhysicalId"}
+         "PhysicalResourceId"=>"PhysicalResourceId"}
       )
     end
 
@@ -37,7 +37,7 @@ RSpec.describe CfnResponse::Builder do
          "LogicalResourceId"=>"Invoker",
          "Reason"=>"See the details in CloudWatch Log Group: #[Double :null] Log Stream: #[Double :null]",
          "Status"=>"SUCCESS",
-         "PhysicalResourceId"=>"PhysicalId",
+         "PhysicalResourceId"=>"PhysicalResourceId",
          "Data"=>{:a=>1, :b=>2}}
       )
     end
@@ -54,7 +54,7 @@ RSpec.describe CfnResponse::Builder do
          "LogicalResourceId"=>"Invoker",
          "Reason"=>"See the details in CloudWatch Log Group: #[Double :null] Log Stream: #[Double :null]",
          "Status"=>"SUCCESS",
-         "PhysicalResourceId"=>"PhysicalId"}
+         "PhysicalResourceId"=>"PhysicalResourceId"}
       )
     end
 
@@ -66,7 +66,7 @@ RSpec.describe CfnResponse::Builder do
          "LogicalResourceId"=>"Invoker",
          "Reason"=>"See the details in CloudWatch Log Group: #[Double :null] Log Stream: #[Double :null]",
          "Status"=>"FAILED",
-         "PhysicalResourceId"=>"PhysicalId"}
+         "PhysicalResourceId"=>"PhysicalResourceId"}
       )
     end
 
@@ -79,7 +79,7 @@ RSpec.describe CfnResponse::Builder do
          "Reason"=>
           "See the details in CloudWatch Log Group: #[Double :null] Log Stream: #[Double :null]",
          "Status"=>"SUCCESS",
-         "PhysicalResourceId"=>"PhysicalId",
+         "PhysicalResourceId"=>"PhysicalResourceId",
          "Data"=>{:a=>1, :b=>2}}
       )
     end
@@ -96,7 +96,7 @@ RSpec.describe CfnResponse::Builder do
          "LogicalResourceId"=>"Invoker",
          "Reason"=>"See the details in CloudWatch Log Group: #[Double :null] Log Stream: #[Double :null]",
          "Status"=>"SUCCESS",
-         "PhysicalResourceId"=>"PhysicalId"}
+         "PhysicalResourceId"=>"PhysicalResourceId"}
       )
     end
 
@@ -108,7 +108,7 @@ RSpec.describe CfnResponse::Builder do
          "LogicalResourceId"=>"Invoker",
          "Reason"=>"See the details in CloudWatch Log Group: #[Double :null] Log Stream: #[Double :null]",
          "Status"=>"FAILED",
-         "PhysicalResourceId"=>"PhysicalId"}
+         "PhysicalResourceId"=>"PhysicalResourceId"}
       )
     end
 
@@ -120,9 +120,37 @@ RSpec.describe CfnResponse::Builder do
          "LogicalResourceId"=>"Invoker",
          "Reason"=>"See the details in CloudWatch Log Group: #[Double :null] Log Stream: #[Double :null]",
          "Status"=>"SUCCESS",
-         "PhysicalResourceId"=>"PhysicalId",
+         "PhysicalResourceId"=>"PhysicalResourceId",
          "Data"=>{:a=>1, :b=>2}}
       )
+    end
+  end
+
+  context "PhysicalResourceId with no number" do
+    let(:event) { event_payload("update/id") }
+
+    it "adds a number to physical_resource_id" do
+      id = subject.physical_resource_id(:new_id)
+      expect(id).to eq("PhysicalResourceId1")
+    end
+
+    it "maintains physical id when nil" do
+      id = subject.physical_resource_id(nil)
+      expect(id).to eq("PhysicalResourceId")
+    end
+
+    it "new physical when user replaces" do
+      id = subject.physical_resource_id("BrandNew")
+      expect(id).to eq("BrandNew")
+    end
+  end
+
+  context "PhysicalResourceId with number 2" do
+    let(:event) { event_payload("update/id2") }
+
+    it "increments number to physical_resource_id" do
+      id = subject.physical_resource_id(:new_id)
+      expect(id).to eq("PhysicalResourceId3")
     end
   end
 end

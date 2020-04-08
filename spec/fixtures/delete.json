@@ -5,7 +5,7 @@
     "StackId": "stack-arn",
     "RequestId": "04da1f38-0577-4bfb-b46a-51ad9da3b11e",
     "LogicalResourceId": "Invoker",
-    "PhysicalResourceId": "PhysicalId",
+    "PhysicalResourceId": "PhysicalResourceId",
     "ResourceType": "Custom::Invoker",
     "ResourceProperties": {
         "ServiceToken": "arn:aws:lambda:us-west-2:112233445566:function:stack-name-HelloFunction-Q5R7SINYZRLG",

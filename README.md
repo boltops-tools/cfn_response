@@ -70,6 +70,23 @@ resp = CfnResponse.new(event, context)
 resp.success(Data: {a: 1, b: 2}, NoEcho: true)
 ```
 
+### PhysicalResourceId
+
+The default PhysicalResourceId is `PhysicalResourceId`. If your logic calls for a new physical resource and you want to tell CloudFormation to replace the resource. Then you can provide a value with the symbol `:new_id` and the library will add a counter value to end of the current physical id.
+
+```ruby
+resp = CfnResponse.new(event, context)
+resp.success(PhysicalResourceId: :new_id)
+# PhysicalResourceId => PhysicalResourceId1 => PhysicalResourceId2 => etc
+```
+
+Or you replace it with your own unique physical resource id value of course.
+
+```ruby
+resp = CfnResponse.new(event, context)
+resp.success(PhysicalResourceId: "MyId")
+```
+
 ## Installation
 
 Add this line to your application's Gemfile:
