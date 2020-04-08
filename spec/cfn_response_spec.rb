@@ -1,5 +1,13 @@
 RSpec.describe CfnResponse do
-  it "has a version number" do
-    expect(CfnResponse::VERSION).not_to be nil
+  subject { described_class.new(event, context) }
+  let(:context) { null }
+  let(:null) { double(:null).as_null_object }
+
+  context "create" do
+    let(:event) { event_payload("create") }
+
+    it "success" do
+      subject.success
+    end
   end
 end

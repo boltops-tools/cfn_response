@@ -1,0 +1,17 @@
+{
+    "RequestType": "Update",
+    "ServiceToken": "arn:aws:lambda:us-west-2:112233445566:function:stack-name-HelloFunction-Q5R7SINYZRLG",
+    "ResponseURL": "https://cloudformation-custom-resource-response-uswest2.s3-us-west-2.amazonaws.com/pre-signed-url-for-create-response",
+    "StackId": "arn:aws:cloudformation:us-west-2:112233445566:stack/stack-name/b9093090-7877-11ea-8474-0ab0a05de03c",
+    "RequestId": "a7994d98-f3ab-47a1-9b2f-e358abc132da",
+    "LogicalResourceId": "Invoker",
+    "PhysicalResourceId": "PhysicalId",
+    "ResourceType": "Custom::Invoker",
+    "ResourceProperties": {
+        "ServiceToken": "arn:aws:lambda:us-west-2:112233445566:function:stack-name-HelloFunction-Q5R7SINYZRLG",
+        "Foo": "bar"
+    },
+    "OldResourceProperties": {
+        "ServiceToken": "arn:aws:lambda:us-west-2:112233445566:function:stack-name-HelloFunction-Q5R7SINYZRLG"
+    }
+}

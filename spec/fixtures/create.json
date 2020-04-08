@@ -1,0 +1,12 @@
+{
+    "RequestType": "Create",
+    "ServiceToken": "arn:aws:lambda:us-west-2:112233445566:function:stack-name-HelloFunction-Q5R7SINYZRLG",
+    "ResponseURL": "https://cloudformation-custom-resource-response-uswest2.s3-us-west-2.amazonaws.com/pre-signed-url-for-create-response",
+    "StackId": "arn:aws:cloudformation:us-west-2:112233445566:stack/stack-name/b9093090-7877-11ea-8474-0ab0a05de03c",
+    "RequestId": "be4527eb-e348-4205-b4ff-9d61b0799488",
+    "LogicalResourceId": "Invoker",
+    "ResourceType": "AWS::CloudFormation::CustomResource",
+    "ResourceProperties": {
+        "ServiceToken": "arn:aws:lambda:us-west-2:112233445566:function:stack-name-HelloFunction-Q5R7SINYZRLG"
+    }
+}
