@@ -4,7 +4,7 @@ require "uri"
 class CfnResponse
   class Sender < Base
     def call(response_data)
-      puts "Sending #{response_data["Status"]} Status to cloudformation"
+      puts "Sending #{response_data["Status"]} Status to CloudFormation"
       url = @event['ResponseURL']
       http_request(url, response_data)
     end
