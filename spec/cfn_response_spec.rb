@@ -22,13 +22,20 @@ RSpec.describe CfnResponse do
       expect(resp.to_s).to eq(null.to_s) # due to stub
     end
 
-    it "call" do
-      resp = subject.call
+    it "send_to_cloudformation" do
+      resp = subject.send_to_cloudformation
       expect(resp.to_s).to eq(null.to_s) # due to stub
     end
 
-    it "safely" do
-      resp = subject.safely do
+    it "response" do
+      resp = subject.response do
+        subject.success
+      end
+      expect(resp.to_s).to eq(null.to_s) # due to stub
+    end
+
+    it "respond" do
+      resp = subject.respond do
         subject.success
       end
       expect(resp.to_s).to eq(null.to_s) # due to stub
